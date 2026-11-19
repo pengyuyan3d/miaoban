@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>喵伴 MiaoBan · 住在桌面上的像素猫</title>
+    <meta name="description" content="一只住在 Windows 桌面上的像素猫：打字踩奶、过热冒蒸汽、追鼠标、番茄钟。纯 C#，60KB 单 exe，免安装不联网。" />
+    <style>
+      :root {
+        --ink: #22322c;
+        --muted: rgba(34, 50, 44, 0.62);
+        --faint: rgba(34, 50, 44, 0.38);
+        --paper: #faf4e6;
+        --card: #fffdf7;
+        --line: rgba(34, 50, 44, 0.14);
+        --coral: #e05a3a;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: linear-gradient(180deg, #f2faf6 0%, var(--paper) 24%, #f7efdd 100%);
+        color: var(--ink);
+        font: 15px/1.75 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      .wrap { max-width: 940px; margin: 0 auto; padding: 56px 24px 76px; }
+      .eyebrow { font-size: 12.5px; color: var(--faint); letter-spacing: .04em; }
+      h1 { font-size: clamp(32px, 4.6vw, 52px); line-height: 1.12; letter-spacing: -.02em; margin: 10px 0 12px; }
+      .lede { font-size: 17px; max-width: 34em; margin: 0 0 22px; }
+      .actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 0 0 8px; }
+      .btn {
+        display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px;
+        background: var(--coral); color: #fff8f0; text-decoration: none;
+        font-size: 14px; font-weight: 600; border-radius: 2px;
+        box-shadow: 0 16px 34px -20px rgba(224, 90, 58, .85);
+      }
+      .btn.ghost {
+        background: #fffdf7; color: var(--ink); border: 1px solid var(--line); box-shadow: none; font-weight: 500;
+      }
+      .hint { font-size: 12.5px; color: var(--faint); }
+      .shot { margin: 34px 0 0; border: 1px solid var(--line); background: var(--card); }
+      .shot img { display: block; width: 100%; }
+      .shot figcaption { padding: 10px 14px; font-size: 12px; color: var(--faint); border-top: 1px solid var(--line); }
+      h2 { font-size: 20px; margin: 46px 0 14px; letter-spacing: -.01em; }
+      table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+      th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+      th { color: var(--faint); font-weight: 500; font-size: 12px; }
+      td:first-child { white-space: nowrap; }
+      .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; margin-top: 12px; font-size: 13.5px; color: var(--muted); }
+      .cols b { display: block; color: var(--ink); margin-bottom: 4px; font-weight: 600; }
+      .note { margin-top: 34px; padding: 16px 18px; border: 1px solid var(--line); background: var(--card); font-size: 13px; color: var(--muted); }
+      footer { margin-top: 42px; font-size: 12px; color: var(--faint); }
+      footer a { color: inherit; }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <p class="eyebrow">张雨 · 桌面小工具</p>
+      <h1>一只住在桌面上的像素猫</h1>
+      <p class="lede">
+        你打字它踩奶，打太快它过热冒蒸汽，鼠标划过它会去追；右键能开番茄钟、提醒你喝水。
+        纯 C#，一个 60KB 的 exe，免安装、不联网、不写系统目录。
+      </p>
+      <div class="actions">
+        <a class="btn" href="https://github.com/pengyuyan3d/miaoban/releases/latest/download/miaoban-v2-win64.zip">下载 v2.0（Windows）</a>
+        <a class="btn ghost" href="https://github.com/pengyuyan3d/miaoban">看源码</a>
+      </div>
+      <p class="hint">解压后双击 MiaoBan.exe；单文件约 70KB，不需要 .NET 之外的运行库。</p>
+
+      <figure class="shot">
+        <img src="docs-shot.png" alt="喵伴桌面效果" />
+        <figcaption>像素画 32×36，逐行定义剪影，白色描边由轮廓自动外扩生成</figcaption>
+      </figure>
+
+      <h2>它会做什么</h2>
+      <table>
+        <tr><th>行为</th><th>触发</th><th>说明</th></tr>
+        <tr><td>踩奶 / 敲键盘</td><td>你打字</td><td>爪子底下浮一个小键盘，左右爪交替</td></tr>
+        <tr><td>过热</td><td>连续快速输入约 1.4 秒</td><td>变红、头顶冒像素蒸汽</td></tr>
+        <tr><td>追鼠标</td><td>右键 / 鼠标快速划过</td><td>压低身子追你的光标</td></tr>
+        <tr><td>摸头</td><td>左键单击</td><td>眯眼笑、冒爱心、气泡「喵~」</td></tr>
+        <tr><td>番茄钟 / 提醒</td><td>右键菜单</td><td>专注 25 分钟、喝水、久坐提醒</td></tr>
+        <tr><td>拖拽</td><td>按住拖</td><td>像麻薯一样拉长，松手回弹</td></tr>
+      </table>
+
+      <div class="cols">
+        <div><b>分层窗口 + 逐像素透明</b>UpdateLayeredWindow + DIB section，自己做 alpha 预乘，形状边缘没有白边。</div>
+        <div><b>不抢焦点</b>WM_MOUSEACTIVATE → MA_NOACTIVATE，点猫不会打断你打字。</div>
+        <div><b>零第三方依赖</b>只用 .NET Framework 自带的 WinForms + GDI+，60KB 一个 exe。</div>
+      </div>
+
+      <p class="note">
+        边界：只做了 Windows；声音（呼噜）没有；自定义花纹只做了一半。功能进度见仓库里的
+        <a href="https://github.com/pengyuyan3d/miaoban/blob/main/README.md">README</a>，与同类产品的逐条对照也写在里面。
+      </p>
+
+      <footer>源码：<a href="https://github.com/pengyuyan3d/miaoban">github.com/pengyuyan3d/miaoban</a></footer>
+    </main>
+  </body>
+</html>
